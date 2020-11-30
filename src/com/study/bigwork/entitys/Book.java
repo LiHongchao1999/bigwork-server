@@ -1,50 +1,50 @@
 package com.study.bigwork.entitys;
 
-
-
 public class Book {
-	private int BookId;
-	private String name;//书名
-	private String publisher;//出版社
-	private int remaining;//剩余数量
-	private int price;
-	private String notification;//购买须知
-	private String image;//图片地址
-	public int getBookId() {
-		return BookId;
+	private int id;
+    private String bookName;//书本名称
+    private String bookAuthor;//书本作者
+    private String bookPress;//书本出版社
+    private double price;//书本价格
+    private int stock;//书本库存
+    private String image;//书本图片
+    private String commission;//推广佣金
+    
+	public int getId() {
+		return id;
 	}
-	public void setBookId(int bookId) {
-		BookId = bookId;
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getBookName() {
+		return bookName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
 	}
-	public String getPublisher() {
-		return publisher;
+	public String getBookAuthor() {
+		return bookAuthor;
 	}
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
+	public void setBookAuthor(String bookAuthor) {
+		this.bookAuthor = bookAuthor;
 	}
-	public int getRemaining() {
-		return remaining;
+	public String getBookPress() {
+		return bookPress;
 	}
-	public void setRemaining(int remaining) {
-		this.remaining = remaining;
+	public void setBookPress(String bookPress) {
+		this.bookPress = bookPress;
 	}
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
-	public String getNotification() {
-		return notification;
+	public int getStock() {
+		return stock;
 	}
-	public void setNotification(String notification) {
-		this.notification = notification;
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 	public String getImage() {
 		return image;
@@ -52,24 +52,24 @@ public class Book {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public Book(int bookId, String name, String publisher, int remaining, int price, String notification,
-			String image) {
-		super();
-		BookId = bookId;
-		this.name = name;
-		this.publisher = publisher;
-		this.remaining = remaining;
-		this.price = price;
-		this.notification = notification;
-		this.image = image;
+	public String getCommission() {
+		return commission;
 	}
-	public Book() {
-		super();
+	public void setCommission(String commission) {
+		this.commission = commission;
 	}
 	@Override
 	public String toString() {
-		return "Book [BookId=" + BookId + ", name=" + name + ", publisher=" + publisher + ", remaining=" + remaining
-				+ ", price=" + price + ", notification=" + notification + ", image=" + image + "]";
+		return "Book [id=" + id + ", bookName=" + bookName + ", bookAuthor=" + bookAuthor + ", bookPress=" + bookPress
+				+ ", price=" + price + ", stock=" + stock + ", image=" + image + ", commission=" + commission + "]";
 	}
+	
+	
+	
+    
+    
+    
+	
+	
 	
 }

@@ -1,34 +1,24 @@
 package com.study.bigwork.entitys;
 
 public class School {
-	private int id;
-	private String schoolName;
-	private String image;//学校图片
-	private String pNumber;//联系电话
-	private String address;//学校地址
+	private int id;//培训机构id
+    private String name;//培训机构名称
+    private String address;//培训机构地址
+    private String content;//培训内容
+    private String photo;//照片
+    private String phone;//电话
+    private String commission;//推广佣金
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getSchoolName() {
-		return schoolName;
+	public String getName() {
+		return name;
 	}
-	public void setSchoolName(String schoolName) {
-		this.schoolName = schoolName;
-	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
-	public String getpNumber() {
-		return pNumber;
-	}
-	public void setpNumber(String pNumber) {
-		this.pNumber = pNumber;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getAddress() {
 		return address;
@@ -36,22 +26,37 @@ public class School {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public School(int id, String schoolName, String image, String pNumber, String address) {
-		super();
-		this.id = id;
-		this.schoolName = schoolName;
-		this.image = image;
-		this.pNumber = pNumber;
-		this.address = address;
+	public String getContent() {
+		return content;
 	}
-	public School() {
-		super();
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getPhoto() {
+		return photo;
+	}
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getCommission() {
+		return commission;
+	}
+	public void setCommission(String commission) {
+		this.commission = commission;
 	}
 	@Override
 	public String toString() {
-		return "School [id=" + id + ", schoolName=" + schoolName + ", image=" + image + ", pNumber=" + pNumber
-				+ ", address=" + address + "]";
+		return "School [id=" + id + ", name=" + name + ", address=" + address + ", content=" + content + ", photo="
+				+ photo + ", phone=" + phone + ", commission=" + commission + "]";
 	}
+	
+	
 	
 	
 }
