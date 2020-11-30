@@ -8,7 +8,7 @@ public class Book {
     private double price;//书本价格
     private int stock;//书本库存
     private String image;//书本图片
-    private String commission;//推广佣金
+    private double commission;//推广佣金
     
 	public int getId() {
 		return id;
@@ -52,11 +52,32 @@ public class Book {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getCommission() {
+	public double getCommission() {
 		return commission;
 	}
-	public void setCommission(String commission) {
+	public void setCommission(double commission) {
 		this.commission = commission;
+	}
+	
+	
+	
+	
+	
+	public Book(int id, String bookName, String bookAuthor, String bookPress, double price, int stock, String image,
+			double commission) {
+		super();
+		this.id = id;
+		this.bookName = bookName;
+		this.bookAuthor = bookAuthor;
+		this.bookPress = bookPress;
+		this.price = price;
+		this.stock = stock;
+		this.image = image;
+		this.commission = commission;
+	}
+	public Book() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public String toString() {
