@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.study.bigwork.entitys.Book;
 import com.study.bigwork.entitys.Homework;
 import com.study.bigwork.util.DBUtil;
@@ -33,11 +35,14 @@ public class HomeworkService {
 		 String deadline = homework.getDeadline();//作业截止时间
 		 String homeworkType = homework.getHomeworkType();//作业类型
 		 List<String> homework_image = homework.getHomework_image();//作业图片
+		 String allPhoto = "";
+		 Gson gson = new Gson();
+		 allPhoto = gson.toJson(homework_image);
 		 double money = homework.getMoney();
 		 
 		//拼接插入订单的sql语句
 		String sql = "insert into `homework`(submitTime, deadline ,homeworkType ,homework_image ,money) "
-				+ "values('" + submitTime + "', " + deadline + ",'" + homeworkType + "'," + homework_image.toString() + ", '" + money + "')";
+				+ "values('" + submitTime + "', '" + deadline + "','" + homeworkType + "','" + allPhoto + "', '" + money + "')";
 		
 		System.out.println(sql);
 		//将订单的信息插入作业表中
@@ -72,14 +77,19 @@ public class HomeworkService {
 				String homeworkType = rs.getString("homeworkType");
 				//获取Homework表字段tag的值
 				String tag = rs.getString("tag");
+				
 				//获取Homework表字段homework_image的值
+				Gson gson = new Gson();
 				List<String> homework_image = new ArrayList<>();
-				homework_image.add(rs.getString("homework_image"));
+				homework_image = gson.fromJson(rs.getString("homework_image"), new TypeToken<ArrayList<String>>() {}.getType());
+				
 				//获取Homework表字段teacher_id的值
 				int teacher_id = rs.getInt("teacher_id");
+				
 				//获取Homework表字段result_image的值
+				Gson gsons = new Gson();
 				List<String> result_image = new ArrayList<>();
-				homework_image.add(rs.getString("result_image"));
+				result_image = gsons.fromJson(rs.getString("result_image"), new TypeToken<ArrayList<String>>() {}.getType());
 				
 				//获取Homework表字段result_text的值
 				String result_text = rs.getString("result_text");
