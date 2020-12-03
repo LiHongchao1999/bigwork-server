@@ -62,15 +62,26 @@ public class UpdateHomeWorkInfoServlet extends HttpServlet {
             e.printStackTrace();
         }
         
+        int id = Integer.parseInt(request.getParameter("id"));
+        int grade = Integer.parseInt(request.getParameter("grade"));
+        int tag = Integer.parseInt(request.getParameter("tag"));
+        System.out.println("获取到的id"+id);
+        System.out.println("获取到的grade"+grade);
+        System.out.println("获取到的tag"+tag);
+        String scored = "true";
+        
+        
         //将json数据转为String
         Gson gson = new Gson();
-        Homework homework =gson.fromJson(stringBuffer.toString(), Homework.class);
+        Homework homework = new Homework();
+        homework.setId(id);
+        homework.setGrade(grade);
+        homework.setScored(scored);
         boolean b = false;
         System.out.println(homework.toString());
         //调用MenuService类中isExistUser方法访问数据库，并返回查询结果
         HomeworkService homeworkService = new HomeworkService();
-        b = homeworkService.addHomework(homework);
-        
+        b = homeworkService.updateHomeworkInfo(homework);
         responseMessage = gson.toJson(b);
         
         System.out.println("对象转为json " + responseMessage);

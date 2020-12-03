@@ -13,6 +13,8 @@ public class Homework {
     private List<String> result_image;//结果图片
     private String result_text;//结果文字
     private double money;//佣金
+    private int grade;//作业评分
+    private String scored;//判断是否评分
 
     public int getId() {
         return id;
@@ -93,22 +95,37 @@ public class Homework {
     public void setMoney(double money) {
         this.money = money;
     }
+    
+    
 
-    public Homework() {
+    public int getGrade() {
+		return grade;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+	
+	
+
+	
+
+	public String getScored() {
+		return scored;
+	}
+
+	public void setScored(String scored) {
+		this.scored = scored;
+	}
+
+	public Homework() {
         
     }
 
-    public Homework(String submitTime, String deadline, String homeworkType, List<String> homework_image, List<String> result_image, double money) {
-        this.submitTime = submitTime;
-        this.deadline = deadline;
-        this.homeworkType = homeworkType;
-        this.homework_image = homework_image;
-        this.result_image = result_image;
-        this.money = money;
-    }
-
 	public Homework(int id, String submitTime, String deadline, String homeworkType, String tag,
-			List<String> homework_image, int teacher_id, List<String> result_image, String result_text, double money) {
+			List<String> homework_image, int teacher_id, List<String> result_image, String result_text, double money,
+			int grade, String scored) {
+		super();
 		this.id = id;
 		this.submitTime = submitTime;
 		this.deadline = deadline;
@@ -119,7 +136,17 @@ public class Homework {
 		this.result_image = result_image;
 		this.result_text = result_text;
 		this.money = money;
+		this.grade = grade;
+		this.scored = scored;
 	}
+
+	
+	
+	
+    
+    
+
+	
     
     
     

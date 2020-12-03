@@ -12,6 +12,7 @@ import com.study.bigwork.entitys.Homework;
 import com.study.bigwork.util.DBUtil;
 
 
+
 public class HomeworkService {
 	private List<Homework> homeworks;
 	private DBUtil dbUtil;
@@ -64,6 +65,7 @@ public class HomeworkService {
 	 */
 	public List<Homework> getHomeworks(String sql){
 		try {
+			System.out.println("获取到的sql语句："+sql);
 			//查询Homework
 			ResultSet rs = dbUtil.queryDate(sql);
 			while(rs.next()) {
@@ -96,16 +98,55 @@ public class HomeworkService {
 				//获取Homework表字段money的值
 				double money = rs.getDouble("money");
 				
+				String scored = rs.getString("scored");
+			
+				//获取Homework表字段grade的值
+				int grade = rs.getInt("grade");
+				
+				
 				//根据获取到的Homework信息构造Homework对象
 				Homework homework = new Homework(id, submitTime, deadline, homeworkType, tag, homework_image, 
-						teacher_id, result_image, result_text, money);
+						teacher_id, result_image, result_text, money, grade, scored);
+				
 				homeworks.add(homework);
+				
+				
 				
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
 		return homeworks;
+	}
+	
+	
+	
+	
+	/**
+	 * 修改作业信息
+	 * @param order 待修改的作业对象
+	 * @return 修改作业是否成功，成功返回true，否则返回false
+	 */
+	public boolean updateHomeworkInfo(Homework homework) {
+		//获取订单信息
+		int id = homework.getId();
+		int grade = homework.getGrade();
+		String scored = homework.getScored();
+		
+		//拼接更新蛋糕的sql语句
+		
+		String sql = "update homework set grade ='" + grade + "',"
+				+ "scored ='" + scored + "' where id ='" + id + "'";
+		
+		System.out.println("添加的sql"+sql);
+		//将订单的信息插入订单表中
+		int n = -1;//存储插入的记录数
+		try {
+			n = dbUtil.updateData(sql);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return n > 0 ? true : false;
 	}
 	
 	
