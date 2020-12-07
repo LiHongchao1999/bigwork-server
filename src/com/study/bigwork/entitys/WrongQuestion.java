@@ -68,6 +68,22 @@ public class WrongQuestion {
 	public void setResult_text_student(String result_text_student) {
 		this.result_text_student = result_text_student;
 	}
+	
+	
+	public WrongQuestion(int id, int wrong_id, int user_id, String question_Type, String update_time,
+			List<String> homework_image, List<String> result_image, String result_text_teacher,
+			String result_text_student) {
+		super();
+		this.id = id;
+		this.wrong_id = wrong_id;
+		this.user_id = user_id;
+		this.question_Type = question_Type;
+		this.update_time = update_time;
+		this.homework_image = homework_image;
+		this.result_image = result_image;
+		this.result_text_teacher = result_text_teacher;
+		this.result_text_student = result_text_student;
+	}
 	@Override
 	public String toString() {
 		return "WrongQuestion [id=" + id + ", wrong_id=" + wrong_id + ", user_id=" + user_id + ", question_Type="

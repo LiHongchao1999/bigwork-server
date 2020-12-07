@@ -1,11 +1,12 @@
 package com.study.bigwork.services;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.study.bigwork.entitys.Homework;
+import com.google.gson.reflect.TypeToken;
 import com.study.bigwork.entitys.WrongQuestion;
 import com.study.bigwork.util.DBUtil;
 
@@ -60,5 +61,63 @@ public class WrongQuestionService {
 		}
 		return n > 0 ? true : false;
 	}
+	
+	
+	/**
+	 * 获取WrongQuestion信息
+	 * @param sql 查询订单的sql语句
+	 * @return WrongQuestion集合
+	 */
+	public List<WrongQuestion> getWrongQuestions(String sql){
+		try {
+			System.out.println("获取到的sql语句："+sql);
+			//查询Homework
+			ResultSet rs = dbUtil.queryDate(sql);
+			while(rs.next()) {
+				//获取Homework表字段id的值
+				int id = rs.getInt("id");
+				//获取Homework表字段wrong_id的值
+				int wrong_id = rs.getInt("wrong_id");
+				//获取Homework表字段user_id的值
+				int user_id = rs.getInt("user_id");
+				//获取Homework表字段question_Type的值
+				String question_Type = rs.getString("question_Type");
+				//获取Homework表字段update_time的值
+				String update_time = rs.getString("update_time");
+				//获取Homework表字段homework_image的值
+				Gson gson = new Gson();
+				List<String> homework_image = new ArrayList<>();
+				homework_image = gson.fromJson(rs.getString("homework_image"), new TypeToken<ArrayList<String>>() {}.getType());
+				//获取Homework表字段result_image的值
+				Gson gsons = new Gson();
+				List<String> result_image = new ArrayList<>();
+				result_image = gsons.fromJson(rs.getString("result_image"), new TypeToken<ArrayList<String>>() {}.getType());
+				
+				//获取Homework表字段result_text的值
+				String result_text_teacher = rs.getString("result_text_teacher");
+				
+				//获取Homework表字段result_text_student的值
+				String result_text_student = rs.getString("result_text_student");
+			
+				
+				
+				//根据获取到的Homework信息构造Homework对象
+				WrongQuestion wrongQuestion = new WrongQuestion(id, wrong_id, user_id, question_Type, update_time, 
+						homework_image, result_image, result_text_teacher, result_text_student);
+				wrongQuestions.add(wrongQuestion);
+				
+				
+				
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return wrongQuestions;
+	}
+	
+	
+	
+	
+	
 
 }
