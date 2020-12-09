@@ -67,11 +67,13 @@ public class GetChatInfoServlet extends HttpServlet {
         User user = new User();
         String sql;
         String chat_id = request.getParameter("chat_id");
+        System.out.println("得到的参数chat_id："+chat_id);
         boolean b = false;
         
         //调用UserService类中isExistUser方法访问数据库，并返回查询结果
         UserService userService = new UserService();
         sql = "select nickname,image,chat_id from user where chat_id = '" + chat_id + "'";
+        System.out.println("这是sql"+sql);
         user = userService.getChatUser(sql);
         responseMessage = gson.toJson(user);
         System.out.println("对象转为json " + responseMessage);

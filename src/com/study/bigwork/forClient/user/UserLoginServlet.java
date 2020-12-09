@@ -94,7 +94,7 @@ public class UserLoginServlet extends HttpServlet {
 				TokenResult tokenResult = getInfo.getToken("user");
 				String chat_id = tokenResult.getUserId();
 				String chat_token = tokenResult.getToken();
-				sql = "insert into user(phoneNumber,chat_id,chat_token) values('" + phoneNumber + "','" + chat_id + "','" + chat_token + "')";
+				sql = "insert into user(nickname,phoneNumber,chat_id,chat_token) values('" + phoneNumber + "','" + phoneNumber + "','" + chat_id + "','" + chat_token + "')";
 				System.out.println("注册用户的时候，获取到的sql语句："+sql);
 				c = userService.addUser(sql);
 				if (c) {
