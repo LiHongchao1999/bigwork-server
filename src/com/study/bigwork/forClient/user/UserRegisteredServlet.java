@@ -33,53 +33,53 @@ public class UserRegisteredServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
-			throws ServletException, IOException {
-		
-		// 设置编码方式
-		request.setCharacterEncoding("utf-8");
-		//设置返回数据格式和编码
-        response.setContentType("application/json;charset=utf-8");
-        
-        //定义StringBuffer变量
-      	StringBuffer stringBuffer = new StringBuffer();
-        //line保存读取请求信息的当前一行，responseMessage为响应信息，返回信息
-        String line = null, responseMessage = null;
-        
-        //输出流
-        PrintWriter out = response.getWriter();
-        
-        //读取信息时会发生IO异常
-        try{
-            //BufferedReader为缓冲读取流
-            BufferedReader bufferedReader = request.getReader();
-            while((line = bufferedReader.readLine()) != null){
-                stringBuffer.append(line);
-            }
-            System.out.println(stringBuffer);
-            
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        
-        //将json数据转为String
-        Gson gson = new Gson();
-        User user =gson.fromJson(stringBuffer.toString(), User.class);
-        
-        boolean b = false;
-        
-        //调用MenuService类中addUser方法访问数据库，并返回查询结果
-        UserService userService = new UserService();
-        
-        b = userService.addUser(user);
-        
-        responseMessage = gson.toJson(b);
-        
-        System.out.println("对象转为json " + responseMessage);
-        //输出流将信息返回
-        out.print(responseMessage);
-        
-	}
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+//			throws ServletException, IOException {
+//		
+//		// 设置编码方式
+//		request.setCharacterEncoding("utf-8");
+//		//设置返回数据格式和编码
+//        response.setContentType("application/json;charset=utf-8");
+//        
+//        //定义StringBuffer变量
+//      	StringBuffer stringBuffer = new StringBuffer();
+//        //line保存读取请求信息的当前一行，responseMessage为响应信息，返回信息
+//        String line = null, responseMessage = null;
+//        
+//        //输出流
+//        PrintWriter out = response.getWriter();
+//        
+//        //读取信息时会发生IO异常
+//        try{
+//            //BufferedReader为缓冲读取流
+//            BufferedReader bufferedReader = request.getReader();
+//            while((line = bufferedReader.readLine()) != null){
+//                stringBuffer.append(line);
+//            }
+//            System.out.println(stringBuffer);
+//            
+//        }catch(IOException e){
+//            e.printStackTrace();
+//        }
+//        
+//        //将json数据转为String
+//        Gson gson = new Gson();
+//        User user =gson.fromJson(stringBuffer.toString(), User.class);
+//        
+//        boolean b = false;
+//        
+//        //调用MenuService类中addUser方法访问数据库，并返回查询结果
+//        UserService userService = new UserService();
+//        
+//        b = userService.addUser(user);
+//        
+//        responseMessage = gson.toJson(b);
+//        
+//        System.out.println("对象转为json " + responseMessage);
+//        //输出流将信息返回
+//        out.print(responseMessage);
+//        
+//	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

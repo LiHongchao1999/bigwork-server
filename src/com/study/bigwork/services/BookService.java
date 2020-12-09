@@ -51,7 +51,6 @@ public class BookService {
 				//根据获取到的图书信息构造图书对象
 				Book book = new Book(id, bookName, bookAuthor, bookPress, price, stock, image, commission);
 				books.add(book);
-				
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

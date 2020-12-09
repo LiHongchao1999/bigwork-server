@@ -10,7 +10,37 @@ public class User {
 	private String weChatNumber;//微信号码
 	private String grade;//年级
 	private String sex;//性别
+	private String chat_id;//聊天id
+	private String chat_token;//聊天token
 	
+	
+	public User(int id, String nickname, String phoneNumber, String password, String image, String qqNumber,
+			String weChatNumber, String grade, String sex, String chat_id, String chat_token) {
+		super();
+		this.id = id;
+		this.nickname = nickname;
+		this.phoneNumber = phoneNumber;
+		this.password = password;
+		this.image = image;
+		this.qqNumber = qqNumber;
+		this.weChatNumber = weChatNumber;
+		this.grade = grade;
+		this.sex = sex;
+		this.chat_id = chat_id;
+		this.chat_token = chat_token;
+	}
+	public String getChat_id() {
+		return chat_id;
+	}
+	public void setChat_id(String chat_id) {
+		this.chat_id = chat_id;
+	}
+	public String getChat_token() {
+		return chat_token;
+	}
+	public void setChat_token(String chat_token) {
+		this.chat_token = chat_token;
+	}
 	public int getId() {
 		return id;
 	}
@@ -73,13 +103,15 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", nickname=" + nickname + ", phoneNumber=" + phoneNumber + ", password=" + password
 				+ ", image=" + image + ", qqNumber=" + qqNumber + ", weChatNumber=" + weChatNumber + ", grade=" + grade
-				+ ", sex=" + sex + "]";
+				+ ", sex=" + sex + ", chat_id=" + chat_id + ", chat_token=" + chat_token + "]";
 	}
+
 	
 	
 	
-	
-	
-	
+	public User() {
+		super();
+	}
+		
 
 }

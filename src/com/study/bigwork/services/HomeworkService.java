@@ -71,6 +71,8 @@ public class HomeworkService {
 			while(rs.next()) {
 				//获取Homework表字段id的值
 				int id = rs.getInt("id");
+				//获取Homework表字段user_id的值
+				int user_id = rs.getInt("user_id");
 				//获取Homework表字段submitTime的值
 				String submitTime = rs.getString("submitTime");
 				//获取Homework表字段deadline的值
@@ -93,6 +95,10 @@ public class HomeworkService {
 				List<String> result_image = new ArrayList<>();
 				result_image = gsons.fromJson(rs.getString("result_image"), new TypeToken<ArrayList<String>>() {}.getType());
 				
+				//获取Homework表字段result_image的值
+				List<String> result_image_teacher = new ArrayList<>();
+				result_image_teacher = gsons.fromJson(rs.getString("result_image_teacher"), new TypeToken<ArrayList<String>>() {}.getType());
+				
 				//获取Homework表字段result_text的值
 				String result_text = rs.getString("result_text");
 				//获取Homework表字段money的值
@@ -105,12 +111,9 @@ public class HomeworkService {
 				
 				
 				//根据获取到的Homework信息构造Homework对象
-				Homework homework = new Homework(id, submitTime, deadline, homeworkType, tag, homework_image, 
-						teacher_id, result_image, result_text, money, grade, scored);
-				
+				Homework homework = new Homework(id, user_id, submitTime, deadline, homeworkType, tag, homework_image,
+						teacher_id, result_image, result_image_teacher, result_text, money, grade, scored);
 				homeworks.add(homework);
-				
-				
 				
 			}
 		} catch (ClassNotFoundException | SQLException e) {
