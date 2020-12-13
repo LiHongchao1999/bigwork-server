@@ -137,9 +137,12 @@ public class UserService {
 		String grade = user.getGrade();// 年级
 		String sex = user.getSex();// 性别
 
-		// 拼接插入用户的sql语句
-		String sql = "insert into user(nickname,phoneNumber,password,image,grade,sex) values('" + nickname + "', '" + phoneNumber + "','" + password + "',"
-				+ "'" + image + "','" + grade + "','" + sex + "',)";
+		// 拼接插入用户的sql语句		
+		String sql = "update user set nickname ='" + nickname + "', phoneNumber ='" + phoneNumber + "',"
+				+ "password ='" + password + "',image ='" + image + "',sex ='" + sex + "' "
+						+ "where id = '" + id + "' ";
+	
+		System.out.println("sql:"+sql);
 
 		// 将用户的信息插入用户表中
 		int n = -1;// 存储插入的记录数

@@ -153,6 +153,25 @@ public class HomeworkService {
 	}
 	
 	
+	public boolean updateHomeworkTag(int id ,int teacher_id ) {
+		//获取订单信息 
+		String tag = "批改中";
+		//拼接更新蛋糕的sql语句
+		String sql = "update homework set teacher_id ='" + teacher_id + "',"
+				+ "tag ='" + tag + "' where id ='" + id + "'";
+		
+		System.out.println("添加的sql"+sql);
+		//将订单的信息插入订单表中
+		int n = -1;//存储插入的记录数
+		try {
+			n = dbUtil.updateData(sql);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return n > 0 ? true : false;
+	}
+	
+	
 	
 	
 	

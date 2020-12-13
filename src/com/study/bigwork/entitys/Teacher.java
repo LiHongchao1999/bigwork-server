@@ -9,6 +9,21 @@ public class Teacher {
 	private int rank;//认证等级
 	private String qqNumber;//qq账号
 	private String weNumber;//微信账号
+	private String chat_id;//聊天id
+	private String chat_token;//聊天token
+	
+	public String getChat_id() {
+		return chat_id;
+	}
+	public void setChat_id(String chat_id) {
+		this.chat_id = chat_id;
+	}
+	public String getChat_token() {
+		return chat_token;
+	}
+	public void setChat_token(String chat_token) {
+		this.chat_token = chat_token;
+	}
 	public int getTeacherId() {
 		return teacherId;
 	}
@@ -76,7 +91,7 @@ public class Teacher {
 	public String toString() {
 		return "Teacher [teacherId=" + teacherId + ", image=" + image + ", pNumber=" + pNumber + ", password="
 				+ password + ", fSchool=" + fSchool + ", rank=" + rank + ", qqNumber=" + qqNumber + ", weNumber="
-				+ weNumber + "]";
+				+ weNumber + ", chat_id=" + chat_id + ", chat_token=" + chat_token + "]";
 	}
 	
 }
