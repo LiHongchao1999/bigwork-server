@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Circle {
 	private int id;
+	private int userId;//用户id
+	private String chatId;//聊天id
     private String userImg; //用户头像
     private String userName;  //用户名
     private String time;  //发表的时间
@@ -13,6 +15,20 @@ public class Circle {
     private int forwardSize;  //转发数
     private int commentSize;  //评论数
     
+    
+    
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public String getChat_id() {
+		return chatId;
+	}
+	public void setChat_id(String chat_id) {
+		this.chatId = chat_id;
+	}
 	public int getId() {
 		return id;
 	}
@@ -67,10 +83,16 @@ public class Circle {
 	public void setCommentSize(int commentSize) {
 		this.commentSize = commentSize;
 	}
-	public Circle(int id, String userImg, String userName, String time, String content, List<String> sendImg,
-			int likeSize, int forwardSize, int commentSize) {
+
+
+	
+	
+	public Circle(int id, int userId, String chatId, String userImg, String userName, String time, String content,
+			List<String> sendImg, int likeSize, int forwardSize, int commentSize) {
 		super();
 		this.id = id;
+		this.userId = userId;
+		this.chatId = chatId;
 		this.userImg = userImg;
 		this.userName = userName;
 		this.time = time;
@@ -86,9 +108,9 @@ public class Circle {
 	}
 	@Override
 	public String toString() {
-		return "Circle [id=" + id + ", userImg=" + userImg + ", userName=" + userName + ", time=" + time + ", content="
-				+ content + ", sendImg=" + sendImg + ", likeSize=" + likeSize + ", forwardSize=" + forwardSize
-				+ ", commentSize=" + commentSize + "]";
+		return "Circle [id=" + id + ", userId=" + userId + ", chatId=" + chatId + ", userImg=" + userImg + ", userName="
+				+ userName + ", time=" + time + ", content=" + content + ", sendImg=" + sendImg + ", likeSize="
+				+ likeSize + ", forwardSize=" + forwardSize + ", commentSize=" + commentSize + "]";
 	}
     
     

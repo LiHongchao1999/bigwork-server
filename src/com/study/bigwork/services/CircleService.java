@@ -33,14 +33,16 @@ public class CircleService {
 		 String userName = circle.getUserName();//用户名
 		 String time = circle.getTime();//发表的时间
 		 String content = circle.getContent();//发表的内容
+		 String chatId = circle.getChat_id();
+		 int userId = circle.getUserId();
 		 List<String> send_image = circle.getSendImg();//作业图片
 		 String sendImg = "";
 		 Gson gson = new Gson();
 		 sendImg = gson.toJson(send_image);
 		 
 		//拼接插入订单的sql语句
-		String sql = "insert into `circle`(userName, time ,content ,sendImg) "
-				+ "values('" + userName + "', '" + time + "','" + content + "','" + sendImg + "')";
+		String sql = "insert into `circle`(userName, time ,content ,sendImg,chatId,userId,userImg) "
+				+ "values('" + userName + "', '" + time + "','" + content + "','" + sendImg + "','" + chatId + "','" + userId + "','" + userImg + "')";
 		
 		System.out.println(sql);
 		//将订单的信息插入作业表中
@@ -67,6 +69,8 @@ public class CircleService {
 			while(rs.next()) {
 				//获取Circle表字段id的值
 				int id = rs.getInt("id");
+				int userId =rs.getInt("userId"); //用户id
+				String chatId = rs.getString("chatId");//聊天id
 				//获取Circle表字段userImg的值
 				String userImg = rs.getString("userImg");
 				//获取Circle表字段userName的值
@@ -88,9 +92,8 @@ public class CircleService {
 				//获取Homework表字段commentSize的值
 				int commentSize = rs.getInt("commentSize");
 				
-				
 				//根据获取到的Homework信息构造Homework对象
-				Circle circle = new Circle(id, userImg, userName, time, content, sendImg, likeSize, forwardSize, commentSize);
+				Circle circle = new Circle(id, userId, chatId, userImg, userName, time, content, sendImg, likeSize, forwardSize, commentSize);
 				circles.add(circle);
 				
 			}

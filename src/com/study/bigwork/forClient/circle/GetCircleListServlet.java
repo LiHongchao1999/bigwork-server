@@ -51,7 +51,7 @@ public class GetCircleListServlet extends HttpServlet {
         String homeworkTypes = "";
         String tag = "";
         String tags = "";
-        String sql = "select * from `circle`";
+        String sql = "select * from `circle` order by id DESC";
         
         
         //调用HomeworkService类中getHomeworks方法访问数据库，并返回查询结果
