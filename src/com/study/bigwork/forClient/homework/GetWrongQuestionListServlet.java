@@ -63,10 +63,10 @@ public class GetWrongQuestionListServlet extends HttpServlet {
         //调用WrongQuestionService类中getWrongQuestions方法访问数据库，并返回查询结果
         WrongQuestionService wrongQuestionService = new WrongQuestionService();
         if (questionType == null || user_id == null) {
-        	sql = "select * from `wrongquestion` where question_Type = '"+questionType+"' ";
+        	sql = "select * from `wrongquestion` where question_Type = '"+questionType+"' order by id DESC";
 		}
         else {
-        	sql = "select * from `wrongquestion` where question_Type = '"+questionType+"' ";
+        	sql = "select * from `wrongquestion` where question_Type = '"+questionType+"' order by id DESC ";
 		}
         wrongQuestions = wrongQuestionService.getWrongQuestions(sql);
         System.out.println("666"+Arrays.asList(wrongQuestions));

@@ -40,10 +40,12 @@ public class HomeworkService {
 		 Gson gson = new Gson();
 		 allPhoto = gson.toJson(homework_image);
 		 double money = homework.getMoney();
+		 String chatId =homework.getChatId();
 		 
 		//拼接插入订单的sql语句
-		String sql = "insert into `homework`(submitTime, deadline ,homeworkType ,homework_image ,money) "
-				+ "values('" + submitTime + "', '" + deadline + "','" + homeworkType + "','" + allPhoto + "', '" + money + "')";
+		String sql = "insert into `homework`(submitTime, deadline ,homeworkType ,homework_image ,money,chatId) "
+				+ "values('" + submitTime + "', '" + deadline + "','" + homeworkType + "',"
+						+ "'" + allPhoto + "', '" + money + "','"+chatId+"')";
 		
 		System.out.println(sql);
 		//将订单的信息插入作业表中
@@ -108,11 +110,12 @@ public class HomeworkService {
 			
 				//获取Homework表字段grade的值
 				int grade = rs.getInt("grade");
+				String chatId = rs.getString("chatId");
 				
 				
 				//根据获取到的Homework信息构造Homework对象
 				Homework homework = new Homework(id, user_id, submitTime, deadline, homeworkType, tag, homework_image,
-						teacher_id, result_image, result_image_teacher, result_text, money, grade, scored);
+						teacher_id, result_image, result_image_teacher, result_text, money, grade, scored,chatId);
 				homeworks.add(homework);
 				
 			}
@@ -151,6 +154,66 @@ public class HomeworkService {
 		}
 		return n > 0 ? true : false;
 	}
+	
+	
+	public boolean updateHomeworkInfo(int tag,Homework homework) {
+		if (tag == 1) {
+			//获取作业信息
+			int id = homework.getId();
+			List<String> result_images = homework.getResult_image();//结果图片
+			String result_image = "";
+			Gson gson = new Gson();
+			result_image = gson.toJson(result_images);
+			
+			//拼接更新图片的sql语句
+			
+			String sql = "update homework set result_image ='" + result_image + "' where id ='" + id + "'";
+			
+			System.out.println("更新图片的sql"+sql);
+			//将订单的信息插入订单表中
+			int n = -1;//存储插入的记录数
+			try {
+				n = dbUtil.updateData(sql);
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
+			return n > 0 ? true : false;
+			
+		}else if (tag ==2) {
+			//获取作业信息
+			int id = homework.getId();
+			
+			List<String> result_images = homework.getResult_image();//结果图片
+			String result_image = "";
+			Gson gson = new Gson();
+			result_image = gson.toJson(result_images);
+			
+			
+			List<String> result_image_teachers = homework.getResult_image_teacher();//老师结果图片
+			String result_image_teacher = "";
+			Gson gson1 = new Gson();
+			result_image_teacher = gson1.toJson(result_image_teachers);
+			
+			//老师评语
+			String result_text =homework.getResult_text();
+			
+			//拼接更新作业信息的sql语句
+			String sql = "update homework set result_image ='" + result_image + "', result_image_teacher = '"+result_image_teacher+"',result_text = '"+result_text+"',tag='批改完成'  where id ='" + id + "'";
+			
+			System.out.println("更新作业信息的sql语句"+sql);
+			//将订单的信息插入订单表中
+			int n = -1;//存储插入的记录数
+			try {
+				n = dbUtil.updateData(sql);
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
+			return n > 0 ? true : false;
+			
+		}
+		return false;
+	}
+	
 	
 	
 	public boolean updateHomeworkTag(int id ,int teacher_id ) {

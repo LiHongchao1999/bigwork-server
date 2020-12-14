@@ -17,8 +17,28 @@ public class Homework {
     private double money;//佣金
     private int grade;//作业评分
     private String scored;//判断是否评分
+    private String chatId;//聊天id
+    
+    
 
-    public int getId() {
+    @Override
+	public String toString() {
+		return "Homework [id=" + id + ", user_id=" + user_id + ", submitTime=" + submitTime + ", deadline=" + deadline
+				+ ", homeworkType=" + homeworkType + ", tag=" + tag + ", homework_image=" + homework_image
+				+ ", teacher_id=" + teacher_id + ", result_image=" + result_image + ", result_image_teacher="
+				+ result_image_teacher + ", result_text=" + result_text + ", money=" + money + ", grade=" + grade
+				+ ", scored=" + scored + ", chatId=" + chatId + "]";
+	}
+
+	public String getChatId() {
+		return chatId;
+	}
+
+	public void setChatId(String chatId) {
+		this.chatId = chatId;
+	}
+
+	public int getId() {
         return id;
     }
 
@@ -139,7 +159,7 @@ public class Homework {
 
 	public Homework(int id, int user_id, String submitTime, String deadline, String homeworkType, String tag,
 			List<String> homework_image, int teacher_id, List<String> result_image, List<String> result_image_teacher,
-			String result_text, double money, int grade, String scored) {
+			String result_text, double money, int grade, String scored, String chatId) {
 		super();
 		this.id = id;
 		this.user_id = user_id;
@@ -155,7 +175,8 @@ public class Homework {
 		this.money = money;
 		this.grade = grade;
 		this.scored = scored;
+		this.chatId = chatId;
 	}
 
-
+	
 }

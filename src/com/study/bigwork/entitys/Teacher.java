@@ -2,6 +2,7 @@ package com.study.bigwork.entitys;
 
 public class Teacher {
 	private int teacherId;
+	private String nickname;//教师昵称
 	private String image;
 	private String pNumber;//教师手机号
 	private String password;//教师密码
@@ -12,6 +13,12 @@ public class Teacher {
 	private String chat_id;//聊天id
 	private String chat_token;//聊天token
 	
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public String getChat_id() {
 		return chat_id;
 	}
@@ -72,10 +79,12 @@ public class Teacher {
 	public void setWeNumber(String weNumber) {
 		this.weNumber = weNumber;
 	}
-	public Teacher(int teacherId, String image, String pNumber, String password, String fSchool, int rank,
-			String qqNumber, String weNumber) {
+	
+	public Teacher(int teacherId, String nickname, String image, String pNumber, String password, String fSchool,
+			int rank, String qqNumber, String weNumber, String chat_id, String chat_token) {
 		super();
 		this.teacherId = teacherId;
+		this.nickname = nickname;
 		this.image = image;
 		this.pNumber = pNumber;
 		this.password = password;
@@ -83,15 +92,19 @@ public class Teacher {
 		this.rank = rank;
 		this.qqNumber = qqNumber;
 		this.weNumber = weNumber;
+		this.chat_id = chat_id;
+		this.chat_token = chat_token;
 	}
 	public Teacher() {
 		super();
 	}
 	@Override
 	public String toString() {
-		return "Teacher [teacherId=" + teacherId + ", image=" + image + ", pNumber=" + pNumber + ", password="
-				+ password + ", fSchool=" + fSchool + ", rank=" + rank + ", qqNumber=" + qqNumber + ", weNumber="
-				+ weNumber + ", chat_id=" + chat_id + ", chat_token=" + chat_token + "]";
+		return "Teacher [teacherId=" + teacherId + ", nickname=" + nickname + ", image=" + image + ", pNumber="
+				+ pNumber + ", password=" + password + ", fSchool=" + fSchool + ", rank=" + rank + ", qqNumber="
+				+ qqNumber + ", weNumber=" + weNumber + ", chat_id=" + chat_id + ", chat_token=" + chat_token + "]";
 	}
+	
+	
 	
 }

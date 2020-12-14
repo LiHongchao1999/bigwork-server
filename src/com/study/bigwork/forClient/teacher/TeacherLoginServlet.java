@@ -1,4 +1,4 @@
-package com.study.bigwork.forClient.homework;
+package com.study.bigwork.forClient.teacher;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,21 +11,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.study.bigwork.entitys.Homework;
-import com.study.bigwork.entitys.WrongQuestion;
-import com.study.bigwork.services.HomeworkService;
+import com.study.bigwork.entitys.Teacher;
+import com.study.bigwork.services.TeacherService;
+import com.study.bigwork.util.GetInfo;
+
+import io.rong.models.response.TokenResult;
 
 /**
- * Servlet implementation class UpdateWorkInfoServlet
+ * Servlet implementation class TeacherLoginServlet
  */
-@WebServlet("/UpdateWorkInfoServlet")
-public class UpdateWorkInfoServlet extends HttpServlet {
+@WebServlet("/TeacherLoginServlet")
+public class TeacherLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateWorkInfoServlet() {
+    public TeacherLoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,6 +37,7 @@ public class UpdateWorkInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		
 		// 设置编码方式
 		request.setCharacterEncoding("utf-8");
 		//设置返回数据格式和编码
@@ -61,22 +64,52 @@ public class UpdateWorkInfoServlet extends HttpServlet {
             e.printStackTrace();
         }
         
-        int tag = Integer.parseInt(request.getParameter("tag"));
-        
-        
         //将json数据转为String
         Gson gson = new Gson();
-        Homework homework =gson.fromJson(stringBuffer.toString(), Homework.class);
+        Teacher teacher =gson.fromJson(stringBuffer.toString(), Teacher.class);
+        Teacher teacher2 = new Teacher();
+        String sql;
+        String phoneNumber = request.getParameter("phoneNumber");
         boolean b = false;
-        System.out.println(homework.toString());
-        //调用MenuService类中isExistUser方法访问数据库，并返回查询结果
-        HomeworkService homeworkService = new HomeworkService();
-        b = homeworkService.updateHomeworkInfo(tag,homework);
-        responseMessage = gson.toJson(b);
+        boolean c = false;
+        
+        //调用TeacherService类中isExistUser方法访问数据库，并返回查询结果
+        TeacherService teacherService = new TeacherService();
+        //使用手机号码+密码登录
+        if (phoneNumber == null) {
+        	sql = "select * from teacher where pNumber = '" + teacher.getpNumber() + "' and password = '" + teacher.getPassword() + "'";
+        	teacher2 = teacherService.getTeacher(sql);
+		}else {//使用手机号码+验证码登录
+			sql = "select * from teacher where pNumber = '" + phoneNumber + "'";
+			b = teacherService.isExistTeacher(sql);
+			if (b) {
+				//已注册
+				teacher2 = teacherService.getTeacher(sql);
+			}else {
+				//未注册
+				Teacher teacher3 = new Teacher();
+				GetInfo getInfo = new GetInfo();
+				TokenResult tokenResult = getInfo.getToken("teacher");
+				String chat_id = tokenResult.getUserId();
+				String chat_token = tokenResult.getToken();
+				sql = "insert into teacher(nickname,pNumber,chat_id,chat_token) values('" + phoneNumber + "','" + phoneNumber + "','" + chat_id + "','" + chat_token + "')";
+				System.out.println("注册用户的时候，获取到的sql语句："+sql);
+				c = teacherService.addTeacher(sql);
+				if (c) {
+					sql = "select * from teacher where pNumber = '" + phoneNumber + "'";
+					teacher2 = teacherService.getTeacher(sql);
+				}else {
+					teacher2 = teacher3;
+				}
+			}
+		}
+        
+        responseMessage = gson.toJson(teacher2);
         
         System.out.println("对象转为json " + responseMessage);
         //输出流将信息返回
         out.print(responseMessage);
+        
 	}
 
 	/**

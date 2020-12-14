@@ -39,7 +39,7 @@ public class UploadHomeworkResultImageServlet extends HttpServlet {
 		String imgName = request.getParameter("imgName");
 		System.out.println(imgName);
 		String address = getServletContext().getRealPath("/");
-		 String path ="./result_images/"+ imgName;
+		 String path ="./images/"+ imgName;
 		InputStream in = request.getInputStream();
 		FileOutputStream fos = new FileOutputStream(address + path);
 		byte[] buffer = new byte[1024];

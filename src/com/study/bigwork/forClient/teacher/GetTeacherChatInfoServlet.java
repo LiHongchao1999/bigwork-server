@@ -1,4 +1,4 @@
-package com.study.bigwork.forClient.homework;
+package com.study.bigwork.forClient.teacher;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,30 +11,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.study.bigwork.entitys.Homework;
-import com.study.bigwork.entitys.WrongQuestion;
-import com.study.bigwork.services.HomeworkService;
+import com.study.bigwork.entitys.Teacher;
+import com.study.bigwork.entitys.User;
+import com.study.bigwork.services.TeacherService;
+import com.study.bigwork.services.UserService;
 
 /**
- * Servlet implementation class UpdateWorkInfoServlet
+ * 弃用
+ * Servlet implementation class GetChatInfoServlet
  */
-@WebServlet("/UpdateWorkInfoServlet")
-public class UpdateWorkInfoServlet extends HttpServlet {
+@WebServlet("/GetTeacherChatInfoServlet")
+public class GetTeacherChatInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateWorkInfoServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+	public GetTeacherChatInfoServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// 设置编码方式
 		request.setCharacterEncoding("utf-8");
 		//设置返回数据格式和编码
@@ -61,28 +65,32 @@ public class UpdateWorkInfoServlet extends HttpServlet {
             e.printStackTrace();
         }
         
-        int tag = Integer.parseInt(request.getParameter("tag"));
-        
-        
         //将json数据转为String
         Gson gson = new Gson();
-        Homework homework =gson.fromJson(stringBuffer.toString(), Homework.class);
+        Teacher teacher = new Teacher();
+        String sql;
+        String chat_id = request.getParameter("chat_id");
+        System.out.println("得到的参数chat_id："+chat_id);
         boolean b = false;
-        System.out.println(homework.toString());
-        //调用MenuService类中isExistUser方法访问数据库，并返回查询结果
-        HomeworkService homeworkService = new HomeworkService();
-        b = homeworkService.updateHomeworkInfo(tag,homework);
-        responseMessage = gson.toJson(b);
         
+        //调用TeacherService类中isExistUser方法访问数据库，并返回查询结果
+        TeacherService teacherService = new TeacherService();
+        sql = "select nickname,image,chat_id from teacher where chat_id = '" + chat_id + "'";
+        System.out.println("这是sql"+sql);
+        teacher = teacherService.getChatTeacher(sql);
+        responseMessage = gson.toJson(teacher);
         System.out.println("对象转为json " + responseMessage);
         //输出流将信息返回
         out.print(responseMessage);
+        
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
