@@ -141,13 +141,17 @@ public class UserService {
 		String sql = "update user set nickname ='" + nickname + "', phoneNumber ='" + phoneNumber + "',"
 				+ "password ='" + password + "',image ='" + image + "',sex ='" + sex + "' "
 						+ "where id = '" + id + "' ";
+		
+		String sql1 = "update circle set userImg ='" + image + "' where userId = '" + id + "' ";
 	
 		System.out.println("sql:"+sql);
 
 		// 将用户的信息插入用户表中
 		int n = -1;// 存储插入的记录数
+		int q = -1;
 		try {
 			n = dbUtil.addDataToTable(sql);
+			q = dbUtil.updateData(sql1);
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
