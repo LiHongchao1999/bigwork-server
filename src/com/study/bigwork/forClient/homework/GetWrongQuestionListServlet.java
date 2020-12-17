@@ -49,11 +49,11 @@ public class GetWrongQuestionListServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String questionType = "";
         String questionTypes = "";
-        String user_id = "";
+        int user_id = 0;
         String tags = "";
         String sql = "";
         questionType = request.getParameter("questionType");
-        user_id = request.getParameter("user_id");
+        user_id = Integer.parseInt(request.getParameter("id"));
         if ("math".equals(questionType)) {
         	questionType = "数学";
 		}else {
@@ -62,12 +62,9 @@ public class GetWrongQuestionListServlet extends HttpServlet {
         
         //调用WrongQuestionService类中getWrongQuestions方法访问数据库，并返回查询结果
         WrongQuestionService wrongQuestionService = new WrongQuestionService();
-        if (questionType == null || user_id == null) {
-        	sql = "select * from `wrongquestion` where question_Type = '"+questionType+"' order by id DESC";
-		}
-        else {
-        	sql = "select * from `wrongquestion` where question_Type = '"+questionType+"' order by id DESC ";
-		}
+        sql = "select * from `wrongquestion` where question_Type = '"+questionType+"' and user_id = "+user_id+" order by id DESC";
+	
+       
         wrongQuestions = wrongQuestionService.getWrongQuestions(sql);
         System.out.println("666"+Arrays.asList(wrongQuestions));
         Gson gson = new Gson();

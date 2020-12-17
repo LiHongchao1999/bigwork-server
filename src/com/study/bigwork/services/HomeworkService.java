@@ -37,7 +37,7 @@ public class HomeworkService {
 		String allPhoto = "";
 		Gson gson = new Gson();
 		allPhoto = gson.toJson(homework_image);
-		double money = homework.getMoney();
+		double money = 2.0f;
 		String chatId = homework.getChatId();
 
 		// 拼接插入订单的sql语句

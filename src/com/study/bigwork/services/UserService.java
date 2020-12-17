@@ -142,7 +142,7 @@ public class UserService {
 				+ "password ='" + password + "',image ='" + image + "',sex ='" + sex + "' "
 						+ "where id = '" + id + "' ";
 		
-		String sql1 = "update circle set userImg ='" + image + "' where userId = '" + id + "' ";
+		String sql1 = "update circle set userImg ='" + image + "' and userName ='"+nickname+"' where userId = '" + id + "' ";
 	
 		System.out.println("sql:"+sql);
 

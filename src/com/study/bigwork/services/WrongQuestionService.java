@@ -42,14 +42,22 @@ public class WrongQuestionService {
 		String allPhoto2 = "";
 		Gson gson2 = new Gson();
 		allPhoto2 = gson2.toJson(result_image);
+		
+		List<String> result_image_teachers = wrongQuestion.getResult_image_teacher();
+		Gson gson3 = new Gson();
+		String result_image_teacher ="";
+		result_image_teacher = gson3.toJson(result_image_teachers);
+		
+		
+		
 		String result_text_teacher = wrongQuestion.getResult_text_teacher();//获取老师注释
 		String result_text_student = wrongQuestion.getResult_text_student();//获取学生注释
 		
 
 		// 拼接插入订单的sql语句
 		String sql = "insert into `wrongquestion`(wrong_id, user_id ,update_time ,question_Type ,homework_image,"
-				+ "result_image,result_text_teacher,result_text_student) " + "values("+ wrong_id + ", " + user_id + ",'" + update_time + "',"
-						+ "'" + question_Type + "', '" + allPhoto1 + "','" + allPhoto2 + "','" + result_text_teacher + "','" + result_text_student + "')";
+				+ "result_image,result_text_teacher,result_text_student,result_image_teacher) " + "values("+ wrong_id + ", " + user_id + ",'" + update_time + "',"
+						+ "'" + question_Type + "', '" + allPhoto1 + "','" + allPhoto2 + "','" + result_text_teacher + "','" + result_text_student + "','"+result_image_teacher+"')";
 
 		System.out.println(sql);
 		// 将错题的信息插入错题表中
@@ -98,12 +106,14 @@ public class WrongQuestionService {
 				
 				//获取Homework表字段result_text_student的值
 				String result_text_student = rs.getString("result_text_student");
+				
+				List<String> result_image_teacher = new ArrayList<>();
+				result_image_teacher = gsons.fromJson(rs.getString("result_image_teacher"), new TypeToken<ArrayList<String>>() {}.getType());
 			
 				
 				
 				//根据获取到的Homework信息构造Homework对象
-				WrongQuestion wrongQuestion = new WrongQuestion(id, wrong_id, user_id, question_Type, update_time, 
-						homework_image, result_image, result_text_teacher, result_text_student);
+				WrongQuestion wrongQuestion = new WrongQuestion(id, wrong_id, user_id, question_Type, update_time, homework_image, result_image, result_text_teacher, result_text_student, result_image_teacher);
 				wrongQuestions.add(wrongQuestion);
 				
 				
